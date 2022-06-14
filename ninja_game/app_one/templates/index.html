@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Ninja Gold Game</h1>
+        <h3 id="goldcounter">Your Gold: {{ gold_score }}</h3>
+        <div class="row">
+            <div id="farm" class="card text-center" style="width: 15rem;">
+                <div class="card-body">
+                <h3 class="card-title">Farm</h3>
+                <h4 class="card-text">(earns 10-20 gold)</h4>
+                <form action="/process_money" id="farmform" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="farm">
+                    <input id="farmbutton" name="submit" type="submit" value="Find Gold!">
+                </form>
+            </div>
+            </div >                
+            <div id="cave" class="card text-center" style="width: 15rem;">
+                <div class="card-body">
+                <h3 class="card-title">Cave</h3>
+                <h4 class="card-text">(earns 10-20 gold)</h4>
+                <form action="/process_money" id="caveform" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="cave">
+                    <input id="cavebutton" name="submit" type="submit" value="Find Gold!">
+                </form>
+            </div>  
+         </div>             
+            <div id="house" class="card text-center" style="width: 15rem;">
+                <div class="card-body">
+                <h3>House</h3>
+                <h4>(earns 10-20 gold)</h4>
+                <form action="/process_money" id="houseform" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="house">
+                    <input id="housebutton" name="submit" type="submit" value="Find Gold!">
+                </form>
+            </div>  
+        </div>             
+            <div id="quest" class="card text-center" style="width: 15rem;">
+                <div class="card-body">
+                <h3>Quest</h3>
+                <h4>(earns/takes 0-50 gold)</h4>
+                <form action="/process_money" id="questform" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="quest">
+                    <input id="questbutton" name="submit" type="submit" value="Find Gold!">
+                </form> 
+            </div>                   
+            </div>               
+        </div>               
+        <div id="activity">
+            <h3>Activities:</h3>
+            <ul class="bg-success p-2" style="--bs-bg-opacity: .5;">
+                {% for each in activity reversed  %}
+                <li>{{ each }}</li>
+                {% endfor%}
+            </ul>
+        </div>
+        <div id="reset">
+            <h4>Reset:</h4>
+            <form action="/reset" id="resetform" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="reset">
+                <input id="resetbutton" name="submit" type="submit" value="Reset Game">
+            </form>  
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
